@@ -1,5 +1,5 @@
 Better Together Discount Module for Zen Cart 1.3
-Version 2.4 
+Version 2.5
 --------------------------------------------------
 Released under the GNU General Public License
 See license.txt file.
@@ -27,6 +27,7 @@ before installing this module.  Alternately, you may use Better Together
 version 1.1, which is compatible with ZenCart 1.3.0 or higher.
 
 History: 
+2.5  06/01/2013 - Added one to many feature. 
 2.4  04/16/2013 - Internal - Consolidated all fixes for variants, plus 
                   Code Inspection.  NO FUNCTIONAL CHANGES.
 2.3b 09/01/2011 - TwoForOne marketing data issues on listing pages.
