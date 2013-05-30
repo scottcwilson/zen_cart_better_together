@@ -4,7 +4,7 @@
  * An order_total module
  * By Scott Wilson (swguy)
  * http://www.thatsoftwareguy.com
- * Version 2.4 
+ * Version 2.5 
  * URL: http://www.thatsoftwareguy.com/zencart_better_together.html
  *
  * @copyright Copyright 2006-2013, That Software Guy
@@ -292,7 +292,7 @@ class ot_better_together {
     * @param $all_items
     * @return float|int - discounted amount.
     */
-   function get_discount($discount_item, &$all_items) {
+   function get_discount($discount_item, &$all_items, &$already_discounted_items, $bt_one_to_many) {
       for ($dis = 0, $n = count($this->discountlist); $dis < $n; $dis++) {
          $li = $this->discountlist[$dis];
 
@@ -322,6 +322,15 @@ class ot_better_together {
             else { // CAT_TO_CAT, PROD_TO_CAT
                if ($all_items[$i]['category'] == $li->ident2) {
                   $match = 1;
+               }
+            }
+            if ($match == 1 && $bt_one_to_many != 0) { 
+               $id = $all_items[$i]['id']; 
+               if ($bt_one_to_many == 1) { 
+                  if (in_array($id, $already_discounted_items)) {
+                     continue;
+                  }
+                  $already_discounted_items[] = $id; 
                }
             }
 
@@ -422,6 +431,7 @@ class ot_better_together {
 
       // Now compute discounts
       $discount = 0;
+      $bt_one_to_many = MODULE_ORDER_TOTAL_BETTER_TOGETHER_ONE_TO_MANY; 
       for ($i = 0, $n = sizeof($discountable_products); $i < $n; $i++) {
          // Is it a twofer?
          if ($this->is_twofer($discountable_products[$i])) {
@@ -437,21 +447,34 @@ class ot_better_together {
          }
 
          // Otherwise, do regular bt processing
+         $already_discounted_items = array(); 
          while ($discountable_products[$i]['quantity'] > 0) {
-            $discountable_products[$i]['quantity'] -= 1;
-            $item_discountable = $this->get_discount($discountable_products[$i], $discountable_products);
-            if ($item_discountable == 0) {
-               $discountable_products[$i]['quantity'] += 1;
-               break;
-            }
-            else {
-               if ($this->include_tax == 'true') {
-                  $discount += $this->gross_up($item_discountable);
+               if ($bt_one_to_many == 0) { 
+                  $discountable_products[$i]['quantity'] -= 1;
+               }
+               $item_discountable = $this->get_discount($discountable_products[$i], $discountable_products, $already_discounted_items, $bt_one_to_many);
+               if ($item_discountable == 0) {
+                  if ($bt_one_to_many == 0) { 
+                     $discountable_products[$i]['quantity'] += 1;
+                     break;
+                  } else {
+                    if (sizeof($already_discounted_items) > 0) {
+                        $discountable_products[$i]['quantity'] -= 1;
+                        $already_discounted_items = array(); 
+                        continue;
+                    } else { 
+                        break;
+                    }
+                  }
                }
                else {
-                  $discount += $item_discountable;
+                  if ($this->include_tax == 'true') {
+                     $discount += $this->gross_up($item_discountable);
+                  }
+                  else {
+                     $discount += $item_discountable;
+                  }
                }
-            }
          }
       }
 
@@ -581,7 +604,7 @@ class ot_better_together {
     * @return array list of keys for module
     */
    function keys() {
-      return array('MODULE_ORDER_TOTAL_BETTER_TOGETHER_STATUS', 'MODULE_ORDER_TOTAL_BETTER_TOGETHER_SORT_ORDER', 'MODULE_ORDER_TOTAL_BETTER_TOGETHER_INC_TAX', 'MODULE_ORDER_TOTAL_BETTER_TOGETHER_CALC_TAX');
+      return array('MODULE_ORDER_TOTAL_BETTER_TOGETHER_STATUS', 'MODULE_ORDER_TOTAL_BETTER_TOGETHER_SORT_ORDER', 'MODULE_ORDER_TOTAL_BETTER_TOGETHER_ONE_TO_MANY', 'MODULE_ORDER_TOTAL_BETTER_TOGETHER_INC_TAX', 'MODULE_ORDER_TOTAL_BETTER_TOGETHER_CALC_TAX');
    }
 
    /**
@@ -592,6 +615,7 @@ class ot_better_together {
       $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) values ('&copy; That Software Guy<br /><div><a href=\"http://www.thatsoftwareguy.com/zencart_better_together.html\" target=\"_blank\">Help</a> - View the Documentation</div><br />This module is installed', 'MODULE_ORDER_TOTAL_BETTER_TOGETHER_STATUS', 'true', '', '6', '1','zen_cfg_select_option(array(\'true\'), ', now())");
       $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) values ('Sort Order', 'MODULE_ORDER_TOTAL_BETTER_TOGETHER_SORT_ORDER', '292', 'Sort order of display.', '6', '2', now())");
       $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function ,date_added) values ('Include Tax', 'MODULE_ORDER_TOTAL_BETTER_TOGETHER_INC_TAX', 'false', 'Include Tax in calculation.', '6', '3','zen_cfg_select_option(array(\'true\', \'false\'), ', now())");
+      $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function ,date_added) values ('One to Many behavior', 'MODULE_ORDER_TOTAL_BETTER_TOGETHER_ONE_TO_MANY', '0', 'If one item has multiple linked items for discount, should one to many be allowed?<br />0= No (Classic Better Together)<br />1= Yes, limit 1 of each<br />2= Yes, no limit<br />(See help for details)', '6', '3','zen_cfg_select_option(array(\'0\', \'1\', \'2\'), ', now())");
       $db->Execute("insert into " . TABLE_CONFIGURATION . " (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function ,date_added) values ('Re-calculate Tax', 'MODULE_ORDER_TOTAL_BETTER_TOGETHER_CALC_TAX', 'Standard', 'Re-Calculate Tax', '6', '4','zen_cfg_select_option(array(\'None\', \'Standard\', \'VAT\', \'Credit Note\'), ', now())");
    }
 
@@ -1006,6 +1030,7 @@ class ot_better_together {
     * http://www.thatsoftwareguy.com/zencart_better_together_admin.html
     */
    function setup() {
+      
       // Using Better Together Admin?  Uncomment this out
       /*
                if (!IS_ADMIN_FLAG) {
@@ -1017,6 +1042,10 @@ class ot_better_together {
       // Some examples are provided:
 
       /*
+
+      $this->add_prod_to_prod(27, 3, "%", 100);
+      $this->add_prod_to_prod(27, 25, "%", 100);
+
                $this->add_prod_to_prod(3, 83, 'X', 0);
 
                $this->add_prod_to_prod(3, 3, "%", 100);
