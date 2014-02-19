@@ -4,7 +4,7 @@
  * An order_total module
  * By Scott Wilson (swguy)
  * http://www.thatsoftwareguy.com
- * Version 2.5 
+ * Version 2.5.1
  * URL: http://www.thatsoftwareguy.com/zencart_better_together.html
  *
  * @copyright Copyright 2006-2013, That Software Guy
@@ -292,7 +292,8 @@ class ot_better_together {
     * @param $all_items
     * @return float|int - discounted amount.
     */
-   function get_discount($discount_item, &$all_items, &$already_discounted_items, $bt_one_to_many) {
+
+   function get_discount($discount_item, &$all_items, &$already_discounted_items = array(), $bt_one_to_many = 0) {
       for ($dis = 0, $n = count($this->discountlist); $dis < $n; $dis++) {
          $li = $this->discountlist[$dis];
 
@@ -671,6 +672,15 @@ class ot_better_together {
             $disc_href = '<a href="' . zen_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $li->ident2) . '">';
             $second_image = zen_get_products_image($li->ident2);
             $name = zen_get_products_name($li->ident2, $_SESSION['languages_id']);
+         }
+
+         // Don't display out of stock products for xsell if not purchaseable
+         if ( ($match == 1) &&  
+              (($li->flavor == PROD_TO_PROD) || ($li->flavor == CAT_TO_PROD)) ) { 
+             if ( (zen_get_products_stock($li->ident2) <= 0) &&
+                  (STOCK_ALLOW_CHECKOUT == 'false') ) {
+                  continue;                         
+             } 
          }
 
          if ($match == 1) {
