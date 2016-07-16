@@ -4,7 +4,7 @@
  * An order_total module
  * By Scott Wilson (swguy)
  * http://www.thatsoftwareguy.com
- * Version 2.5.1
+ * Version 2.5.2
  * URL: http://www.thatsoftwareguy.com/zencart_better_together.html
  *
  * @copyright Copyright 2006-2013, That Software Guy
@@ -114,7 +114,7 @@ class bt_twofer {
 class ot_better_together {
    var $title, $output;
 
-   function ot_better_together() {
+   function __construct() {
       $this->code = 'ot_better_together';
       $this->title = MODULE_ORDER_TOTAL_BETTER_TOGETHER_TITLE;
       $this->description = MODULE_ORDER_TOTAL_BETTER_TOGETHER_DESCRIPTION;
@@ -1040,7 +1040,6 @@ class ot_better_together {
     * http://www.thatsoftwareguy.com/zencart_better_together_admin.html
     */
    function setup() {
-      
       // Using Better Together Admin?  Uncomment this out
       /*
                if (!IS_ADMIN_FLAG) {
