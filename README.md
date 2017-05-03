@@ -195,6 +195,7 @@ This step is optional; if you prefer, you can add your own cross-selling text.
 --------------------------------------------------
 
 ## Installation Instructions: 
+
 0. Back up everything!  Try this in a test environment prior to installing
 it on a live shop.
 
