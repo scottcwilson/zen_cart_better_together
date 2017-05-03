@@ -1,5 +1,5 @@
 Better Together Discount Module for Zen Cart 1.3
-Version 2.5.2
+Version 2.5.3
 --------------------------------------------------
 Released under the GNU General Public License
 See license.txt file.
@@ -23,10 +23,10 @@ No warranties expressed or implied; use at your own risk.
 
 This module should only be used with ZenCart 1.3.5 or higher. 
 If you are still running an earlier verison of ZenCart, please upgrade
-before installing this module.  Alternately, you may use Better Together
-version 1.1, which is compatible with ZenCart 1.3.0 or higher.
+before installing this module.  
 
 History: 
+2.5.3 05/03/2017  Fixes for one-to-many discounts with identical items
 2.5.2 07/16/2016 - Interoperabilty issue with Checkout Candy and Better Together > 2.5.
 2.5.1 03/01/2014 - Interoperabilty issue with Checkout Candy and Better Together > 2.5.
 2.5  06/01/2013 - Added one to many feature. 

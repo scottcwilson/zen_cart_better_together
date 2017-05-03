@@ -4,10 +4,10 @@
  * An order_total module
  * By Scott Wilson (swguy)
  * http://www.thatsoftwareguy.com
- * Version 2.5.2
+ * Version 2.5.3
  * URL: http://www.thatsoftwareguy.com/zencart_better_together.html
  *
- * @copyright Copyright 2006-2013, That Software Guy
+ * @copyright Copyright 2006-2017, That Software Guy
  * @copyright Portions Copyright 2004-2006 Zen Cart Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
@@ -293,7 +293,7 @@ class ot_better_together {
     * @return float|int - discounted amount.
     */
 
-   function get_discount($discount_item, &$all_items, &$already_discounted_items = array(), $bt_one_to_many = 0) {
+   function get_discount($discount_item, &$all_items, &$already_discounted_items = array(), $bt_one_to_many = 0, $pos = -1) {
       for ($dis = 0, $n = count($this->discountlist); $dis < $n; $dis++) {
          $li = $this->discountlist[$dis];
 
@@ -313,6 +313,12 @@ class ot_better_together {
          for ($i = sizeof($all_items) - 1; $i >= 0; $i--) {
             if ($all_items[$i]['quantity'] == 0)
                continue;
+           // one to many check 
+            if ($pos != -1) { 
+               if ($i == $pos && $all_items[$i]['quantity'] == 1 && $bt_one_to_many != 0) {
+                  continue;
+               }
+            }
             $match = 0;
             if (($li->flavor == PROD_TO_PROD) || ($li->flavor == CAT_TO_PROD)
             ) {
@@ -453,7 +459,7 @@ class ot_better_together {
                if ($bt_one_to_many == 0) { 
                   $discountable_products[$i]['quantity'] -= 1;
                }
-               $item_discountable = $this->get_discount($discountable_products[$i], $discountable_products, $already_discounted_items, $bt_one_to_many);
+               $item_discountable = $this->get_discount($discountable_products[$i], $discountable_products, $already_discounted_items, $bt_one_to_many, $i);
                if ($item_discountable == 0) {
                   if ($bt_one_to_many == 0) { 
                      $discountable_products[$i]['quantity'] += 1;
@@ -1047,8 +1053,19 @@ class ot_better_together {
                }
       */
 
+       // $this->add_cat_to_cat(9, 9, "%", 100);
+       // $this->add_cat_to_cat(9, 5, "%", 100);
+       // $this->add_cat_to_cat(5, 5, "%", 100);
+     // $this->add_prod_to_prod(3, 3, "%", 100);
+     // $this->add_prod_to_cat(3, 14, "%", 100);
+      //$this->add_cat_to_prod(4, 3, "%", 100);
+
       // Add all linkages here
       // Some examples are provided:
+      //         $this->add_cat_to_prod(4, 3, "%", 100);
+       //        $this->add_cat_to_cat(21, 14, "%", 100);
+     // $this->add_prod_to_prod(3, 180, "%", 100);
+      // $this->add_prod_to_prod(3, 27, "%", 100);
 
       /*
 
