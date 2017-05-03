@@ -44,7 +44,7 @@ At the moment, linking must be done in code by default.
 If you wish, you may upgrade to the Better Together Admin Panel; see 
 <http://www.thatsoftwareguy.com/zencart_better_together_admin.html>
 
-##Detailed Description: 
+## Detailed Description: 
 
 Linkages are specified in the setup() method at the bottom of the file 
 `includes/modules/order_total/ot_better_together.php`.
@@ -194,7 +194,7 @@ This step is optional; if you prefer, you can add your own cross-selling text.
 
 --------------------------------------------------
 
-##Installation Instructions: 
+## Installation Instructions: 
 0. Back up everything!  Try this in a test environment prior to installing
 it on a live shop.
 
