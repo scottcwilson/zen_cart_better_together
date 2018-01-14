@@ -240,7 +240,10 @@ Then add this block of code to the `tpl_product_info_display.php` file
     require($template->get_template_dir('/tpl_better_together_marketing.php',DIR_WS_TEMPLATE, $current_page_base,'templates'). '/tpl_better_together_marketing.php');
     ?>
 
-The placement of this code is a matter of personal preference.
+The placement of this code is a matter of personal preference.  
+(There are constraints if you are using Buy Both Now, but otherwise, you
+can put it anywhere.)
+
 Try placing it below the product description and adjust to your taste.
 
 Note that in version 2.1 and greater, you can use
