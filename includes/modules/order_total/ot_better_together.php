@@ -4,10 +4,10 @@
  * An order_total module
  * By Scott Wilson (swguy)
  * http://www.thatsoftwareguy.com
- * Version 2.5.3
+ * Version 2.6
  * URL: http://www.thatsoftwareguy.com/zencart_better_together.html
  *
- * @copyright Copyright 2006-2017, That Software Guy
+ * @copyright Copyright 2006-2018, That Software Guy
  * @copyright Portions Copyright 2004-2006 Zen Cart Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
@@ -119,7 +119,8 @@ class ot_better_together {
       $this->title = MODULE_ORDER_TOTAL_BETTER_TOGETHER_TITLE;
       $this->description = MODULE_ORDER_TOTAL_BETTER_TOGETHER_DESCRIPTION;
       /** @noinspection PhpUndefinedConstantInspection */
-      $this->sort_order = MODULE_ORDER_TOTAL_BETTER_TOGETHER_SORT_ORDER;
+      $this->sort_order = defined('MODULE_ORDER_TOTAL_BETTER_TOGETHER_SORT_ORDER') ? MODULE_ORDER_TOTAL_BETTER_TOGETHER_SORT_ORDER : null;
+      if (null === $this->sort_order) return false;
       /** @noinspection PhpUndefinedConstantInspection */
       $this->include_tax = MODULE_ORDER_TOTAL_BETTER_TOGETHER_INC_TAX;
       /** @noinspection PhpUndefinedConstantInspection */
@@ -1046,12 +1047,12 @@ class ot_better_together {
     * http://www.thatsoftwareguy.com/zencart_better_together_admin.html
     */
    function setup() {
-      // Using Better Together Admin?  Uncomment this out
-      /*
-               if (!IS_ADMIN_FLAG) {
-                  require(DIR_WS_MODULES . 'better_together_admin.php');
-               }
-      */
+
+       if (!IS_ADMIN_FLAG) {
+          if (file_exists(DIR_WS_MODULES . 'better_together_admin.php')) {
+             require(DIR_WS_MODULES . 'better_together_admin.php');
+          }
+       }
 
        // $this->add_cat_to_cat(9, 9, "%", 100);
        // $this->add_cat_to_cat(9, 5, "%", 100);

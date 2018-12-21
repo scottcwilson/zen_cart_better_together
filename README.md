@@ -1,6 +1,6 @@
 # Better Together Discount Module for Zen Cart
 
-Version 2.5.3
+Version 2.6
 
 Author: Scott Wilson
 <http://www.thatsoftwareguy.com>
