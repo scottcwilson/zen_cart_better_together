@@ -1,5 +1,5 @@
-Better Together Discount Module for Zen Cart 1.3
-Version 2.6
+Better Together Discount Module for Zen Cart 
+Version 2.7
 --------------------------------------------------
 Released under the GNU General Public License
 See license.txt file.
@@ -21,11 +21,8 @@ Please read the FAQ on this page before posting to the forum.
 
 No warranties expressed or implied; use at your own risk.
 
-This module should only be used with ZenCart 1.3.5 or higher. 
-If you are still running an earlier verison of ZenCart, please upgrade
-before installing this module.  
-
 History: 
+2.7   02/12/2022  Updates for PHP8. 
 2.6   12/20/2018  Updates for PHP7. 
 2.5.3 05/03/2017  Fixes for one-to-many discounts with identical items
 2.5.2 07/16/2016 - Interoperabilty issue with Checkout Candy and Better Together > 2.5.
@@ -288,7 +285,7 @@ Note that in version 2.1 and greater, you can use
 tpl_better_together_marketing_images.php, i.e. 
 
 <?php 
-require($template->get_template_dir('/tpl_better_together_marketing.php',DIR_WS_TEMPLATE, $current_page_base,'templates'). '/tpl_better_together_marketing.php');
+require($template->get_template_dir('/tpl_better_together_marketing_images.php',DIR_WS_TEMPLATE, $current_page_base,'templates'). '/tpl_better_together_marketing_images.php');
 ?>
 
 if you wish to display images in your marketing text.

@@ -4,10 +4,10 @@
  * An order_total module
  * By Scott Wilson (swguy)
  * http://www.thatsoftwareguy.com
- * Version 2.6
+ * Version 2.7
  * URL: http://www.thatsoftwareguy.com/zencart_better_together.html
  *
- * @copyright Copyright 2006-2018, That Software Guy
+ * @copyright Copyright 2006-2022, That Software Guy
  * @copyright Portions Copyright 2004-2006 Zen Cart Team
  * @copyright Portions Copyright 2003 osCommerce
  * @license http://www.zen-cart.com/license/2_0.txt GNU Public License V2.0
@@ -407,7 +407,7 @@ class ot_better_together {
          reset($order->info['tax_groups']);
          $taxGroups = array_keys($order->info['tax_groups']);
          foreach ($taxGroups as $key) {
-            if ($od_amount[$key]) {
+            if (isset($od_amount[$key])) {
                $order->info['tax_groups'][$key] -= $od_amount[$key];
                if ($this->calculate_tax != 'VAT') {
                   $order->info['total'] -= $od_amount[$key];
@@ -1048,63 +1048,17 @@ class ot_better_together {
     */
    function setup() {
 
-       if (!IS_ADMIN_FLAG) {
-          if (file_exists(DIR_WS_MODULES . 'better_together_admin.php')) {
-             require(DIR_WS_MODULES . 'better_together_admin.php');
-          }
-       }
-
-       // $this->add_cat_to_cat(9, 9, "%", 100);
-       // $this->add_cat_to_cat(9, 5, "%", 100);
-       // $this->add_cat_to_cat(5, 5, "%", 100);
-     // $this->add_prod_to_prod(3, 3, "%", 100);
-     // $this->add_prod_to_cat(3, 14, "%", 100);
-      //$this->add_cat_to_prod(4, 3, "%", 100);
+      if (file_exists(DIR_WS_MODULES . 'better_together_admin.php')) {
+          require(DIR_WS_MODULES . 'better_together_admin.php');
+      }
 
       // Add all linkages here
       // Some examples are provided:
-      //         $this->add_cat_to_prod(4, 3, "%", 100);
-       //        $this->add_cat_to_cat(21, 14, "%", 100);
-     // $this->add_prod_to_prod(3, 180, "%", 100);
+      // $this->add_cat_to_prod(4, 3, "%", 100);
+      // $this->add_cat_to_cat(21, 14, "%", 100);
+      // $this->add_prod_to_prod(3, 180, "%", 100);
       // $this->add_prod_to_prod(3, 27, "%", 100);
 
-      /*
-
-      $this->add_prod_to_prod(27, 3, "%", 100);
-      $this->add_prod_to_prod(27, 25, "%", 100);
-
-               $this->add_prod_to_prod(3, 83, 'X', 0);
-
-               $this->add_prod_to_prod(3, 3, "%", 100);
-               $this->add_prod_to_prod(3, 83, "%", 100);
-               $this->add_prod_to_prod(3, 27, "%", 100);
-               $this->add_cat_to_prod(4, 3, "%", 100);
-               $this->add_cat_to_prod(4, 83, "%", 100);
-               // Buy product 83, get product 53 at 50% off
-               $this->add_prod_to_prod(83, 53, "%", 50);
-
-               // Buy product 83, get one free
-               $this->add_prod_to_prod(83, 83, "%", 100);
-
-               // Buy product 83, get an item from category 14 free
-               $this->add_prod_to_cat(83, 14, "%", 100);
-
-               // Buy an item from category 21, get an item from category 14 free
-               $this->add_cat_to_cat(21, 14, "%", 100);
-
-               // Buy item 12, get a second one free.
-               $this->add_twoforone_prod(12);
-
-               // Buy any item from category 10, get a second identical one free
-               $this->add_twoforone_cat(10);
-
-               // $this->add_twoforone_prod(17);
-               $this->add_prod_to_prod(26, 27, "%", 100);
-               $this->add_prod_to_prod(83, 15, "%", 50);
-               $this->add_prod_to_prod(83, 20, "%", 25);
-               $this->add_cat_to_cat(14, 14, "%", 100);
-               $this->add_prod_to_prod(3, 25, "%", 50);
-      */
    }
 
 }

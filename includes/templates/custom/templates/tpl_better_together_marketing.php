@@ -15,7 +15,9 @@
         for ($i=0, $n=count($marketing_data); $i<$n; $i++) {
               echo '<div class="discountText">'; 
               echo $marketing_data[$i]['data'];
-              echo '<span class="bbn_button_noimg">' . $marketing_data[$i]['bbn_string'] . '</span>';
+              if (isset($marketing_data[$i]['bbn_string'])) { 
+                 echo '<span class="bbn_button_noimg">' . $marketing_data[$i]['bbn_string'] . '</span>';
+              }
               echo '</div>'; 
         }
         echo '</div>';
