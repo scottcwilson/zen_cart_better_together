@@ -1,60 +1,26 @@
 Better Together Discount Module for Zen Cart 
-Version 2.7
+Version 3.1
 --------------------------------------------------
 Released under the GNU General Public License
 See license.txt file.
 --------------------------------------------------
 Author: Scott Wilson
-http://www.thatsoftwareguy.com 
+https://www.thatsoftwareguy.com 
 Zen Forum PM swguy
-Donations welcome at http://donate.thatsoftwareguy.com/
+Donations welcome at https://donate.thatsoftwareguy.com/
 
 Even more information on this contribution is provided at 
 
-http://www.thatsoftwareguy.com/zencart_better_together.html
+https://www.thatsoftwareguy.com/zencart_better_together.html
 
 and see also 
 
-http://www.thatsoftwareguy.com/zencart_better_together_world.html
+https://www.thatsoftwareguy.com/zencart_better_together_world.html
 
 Please read the FAQ on this page before posting to the forum.
 
 No warranties expressed or implied; use at your own risk.
 
-History: 
-2.7   02/12/2022  Updates for PHP8. 
-2.6   12/20/2018  Updates for PHP7. 
-2.5.3 05/03/2017  Fixes for one-to-many discounts with identical items
-2.5.2 07/16/2016 - Interoperabilty issue with Checkout Candy and Better Together > 2.5.
-2.5.1 03/01/2014 - Interoperabilty issue with Checkout Candy and Better Together > 2.5.
-2.5  06/01/2013 - Added one to many feature. 
-2.4  04/16/2013 - Internal - Consolidated all fixes for variants, plus 
-                  Code Inspection.  NO FUNCTIONAL CHANGES.
-2.3b 09/01/2011 - TwoForOne marketing data issues on listing pages.
-2.3a 07/23/2010 - Fixed formatting issue in marketing text.
-2.3  05/01/2010 - Added cross sells.
-2.2  04/03/2010 - VAT standardization.
-2.1a 02/18/2010 - Minor housekeeping.
-2.1  12/16/2009 - added images to marketing text
-2.0.1_vat  12/03/2009 - added VAT style recalculate tax 
-2.0  09/01/2008 - Added price sorting, add_cat_to_prod
-1.6  12/14/2007 - Compatibility with 1.3.8.    
-1.5a 09/18/2007 - Fixed Google Checkout issue.
-1.5  09/08/2007 - Fixed some messages; consolidated marketing text down to 
-                  one div; only display marketing text if module turned on
-1.4a 07/31/2007 - Bad file upload
-1.4 07/31/2007 - Simplified inclusion of marketing logic by adding it to this 
-                 package.  Some minor language improvements.
-1.3 12/30/2006 - Adding marketing ability to print discounts in reverse order.
-                 (If buy A, get B free is offered, can now show this on 
-                 B's page, not just A's page.)
-               - Allow products which are ordered in odd quantities to be 
-                 used as two-for-ones *and* better together discounts if so
-                 specified.  Previously, two-for-one products were not 
-                 additionally checked for better together discounts.
-1.2 12/03/2006 - Adding explicit two for one support
-1.1 09/26/2006 - Second Release (providing PHP 4 compatibility)
-1.0 09/15/2006 - First Release 
 --------------------------------------------------
 Overview: 
 The gold standard of online retailing is Amazon.com. Zen Cart store operators
@@ -84,7 +50,7 @@ the product_info page offering cross sell offers applicable to that item.
 
 At the moment, linking must be done in code by default. 
 If you wish, you may upgrade to the Better Together Admin Panel; see 
-http://www.thatsoftwareguy.com/zencart_better_together_admin.html
+https://www.thatsoftwareguy.com/zencart_better_together_admin.html
 
 Detailed Description: 
 
@@ -240,10 +206,7 @@ selecting "Better Together" and pressing the "Remove" button.  Make
 a note of your settings so you can apply them to the new version.
 
 2. Copy the contents of the folder you have unzipped to 
-the root directory of your shop.  NOTE that these files assume
-your template name is "custom," so any file with "custom" 
-in its path name will need to be renamed if you are using a 
-different template name.  
+the root directory of your shop. 
 
 3. Login to admin and in Modules->Order Total you will see 'Better Together' listed along with all the other modules available.
 
@@ -264,8 +227,8 @@ into includes/templates/YOUR_TEMPLATE/templates if you haven't already
 done so. 
 
 6b. Put the file 
-./includes/templates/custom/templates/tpl_better_together_marketing.php
-into includes/templates/YOUR_TEMPLATE/templates 
+./includes/templates/template_default/templates/tpl_better_together_marketing.php
+into includes/templates/template_default/templates 
 
 (If you did step 2 properly, it should already be there.)
 
@@ -322,7 +285,7 @@ Note that cross sells, unlike regular Better Together offers, are not bidirectio
 7. If you wish, get a copy of the Better Together Promotional Page by 
 following the links on 
 
-http://www.thatsoftwareguy.com/zencart_better_together.html
+https://www.thatsoftwareguy.com/zencart_better_together.html
 
 The Better Together Promotional Page displays all the Better Together discounts you are offering.
  
@@ -330,9 +293,9 @@ New Files
 =========
 includes/languages/english/modules/order_total/ot_better_together.php
 includes/modules/order_total/ot_better_together.php
-includes/templates/custom/templates/tpl_better_together_marketing.php
-includes/templates/custom/templates/tpl_better_together_marketing_images.php
-includes/templates/custom/templates/tpl_better_together_xsells.php
-includes/templates/custom/css/stylesheet_bettertogether_product.css
+includes/templates/template_default/templates/tpl_better_together_marketing.php
+includes/templates/template_default/templates/tpl_better_together_marketing_images.php
+includes/templates/template_default/templates/tpl_better_together_xsells.php
+includes/templates/template_default/css/stylesheet_bettertogether_product.css
 
 

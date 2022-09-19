@@ -48,12 +48,12 @@ define('TWOFER_CAT', '12');
  * Better Together discount class.  For discounts other than twofers.
  */
 class bt_discount {
-   var $ident1; // Product id or category
-   var $ident2; // Product id or category
-   var $type; // % or $ or X
-   var $amt; // numerical amount
-   var $flavor; // PROD_TO_PROD, PROD_TO_CAT, CAT_TO_CAT, CAT_TO_PROD
-   var $isvalid;
+   public $ident1; // Product id or category
+   public $ident2; // Product id or category
+   public $type; // % or $ or X
+   public $amt; // numerical amount
+   public $flavor; // PROD_TO_PROD, PROD_TO_CAT, CAT_TO_CAT, CAT_TO_PROD
+   public $isvalid;
 
    /**
     * Initialization function
@@ -89,10 +89,10 @@ class bt_discount {
  * Better Together twofer discount class
  */
 class bt_twofer {
-   var $ident1; // Product or category id
-   var $ident2; // Product or category id
-   var $flavor; // Can only be TWOFER_PROD or TWOFER_CAT
-   var $isvalid;
+   public $ident1; // Product or category id
+   public $ident2; // Product or category id
+   public $flavor; // Can only be TWOFER_PROD or TWOFER_CAT
+   public $isvalid;
 
    function init($ident1, $flavor) {
       $this->isvalid = 0;
@@ -112,7 +112,21 @@ class bt_twofer {
 }
 
 class ot_better_together {
-   var $title, $output;
+
+    protected $_check;
+    public $code;
+    public $calculate_tax;
+    public $credit_class;
+    protected $deduction;
+    public $description;
+    public $include_shipping;
+    public $include_tax;
+    public $sort_order;
+    public $tax_class;
+    public $title;
+    public $output = [];
+
+    protected $discountlist, $xselllist, $twoferlist, $nocontext; 
 
    function __construct() {
       $this->code = 'ot_better_together';
@@ -1054,7 +1068,7 @@ class ot_better_together {
 
       // Add all linkages here
       // Some examples are provided:
-      // $this->add_cat_to_prod(4, 3, "%", 100);
+      $this->add_cat_to_prod(4, 3, "%", 100);
       // $this->add_cat_to_cat(21, 14, "%", 100);
       // $this->add_prod_to_prod(3, 180, "%", 100);
       // $this->add_prod_to_prod(3, 27, "%", 100);

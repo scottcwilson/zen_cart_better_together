@@ -1,17 +1,17 @@
 # Better Together Discount Module for Zen Cart
 
-Version 2.7
+Version 3.1
 
 Author: Scott Wilson
-<http://www.thatsoftwareguy.com>
+<https://www.thatsoftwareguy.com>
 
 Even more information on this contribution is provided at 
 
-<http://www.thatsoftwareguy.com/zencart_better_together.html>
+<https://www.thatsoftwareguy.com/zencart_better_together.html>
 
 and also 
 
-<http://www.thatsoftwareguy.com/zencart_better_together_world.html>
+<https://www.thatsoftwareguy.com/zencart_better_together_world.html>
 
 
 ## Overview: 
@@ -42,7 +42,7 @@ the product_info page offering cross sell offers applicable to that item.
 
 At the moment, linking must be done in code by default. 
 If you wish, you may upgrade to the Better Together Admin Panel; see 
-<http://www.thatsoftwareguy.com/zencart_better_together_admin.html>
+<https://www.thatsoftwareguy.com/zencart_better_together_admin.html>
 
 ## Detailed Description: 
 
@@ -205,10 +205,7 @@ selecting "Better Together" and pressing the "Remove" button.  Make
 a note of your settings so you can apply them to the new version.
 
 2. Copy the contents of the folder you have unzipped to 
-the root directory of your shop.  NOTE that these files assume
-your template name is "custom," so any file with "custom" 
-in its path name will need to be renamed if you are using a 
-different template name.  
+the root directory of your shop.  
 
 3. Login to admin and in Modules->Order Total you will see 'Better Together' listed along with all the other modules available.
 
@@ -229,8 +226,8 @@ into `includes/templates/YOUR_TEMPLATE/templates` if you haven't already
 done so. 
 
 8. Put the file 
-`includes/templates/custom/templates/tpl_better_together_marketing.php`
-into `includes/templates/YOUR_TEMPLATE/templates` 
+`includes/templates/template_default/templates/tpl_better_together_marketing.php`
+into `includes/templates/template_default/templates` 
 
 (If you did step 3 properly, it should already be there.)
 
@@ -286,15 +283,15 @@ Note that cross sells, unlike regular Better Together offers, are not bidirectio
 If you wish, get a copy of the Better Together Promotional Page by 
 following the links on 
 
-<http://www.thatsoftwareguy.com/zencart_better_together.html>
+<https://www.thatsoftwareguy.com/zencart_better_together.html>
 
 The Better Together Promotional page displays all the Better Together discounts you are offering.
 
 ## Help
 Additional Help may be found in the following places:
 
-* The main documentation page: <http://www.thatsoftwareguy.com/zencart_better_together.html>
-* The support thread for Better Together on the Zen Cart forum: <http://www.thatsoftwareguy.com/zencart_better_together.html>
+* The main documentation page: <https://www.thatsoftwareguy.com/zencart_better_together.html>
+* The support thread for Better Together on the Zen Cart forum: <https://www.thatsoftwareguy.com/zencart_better_together.html>
 
 ## License
 This contribution to Zen Cart is licensed under the GNU Public License.  See license.txt for details.
