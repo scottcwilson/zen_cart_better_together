@@ -1,5 +1,5 @@
 Better Together Discount Module for Zen Cart 
-Version 3.1
+Version 3.2
 --------------------------------------------------
 Released under the GNU General Public License
 See license.txt file.

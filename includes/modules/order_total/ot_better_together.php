@@ -315,7 +315,7 @@ class ot_better_together {
          // Based on type, check ident1
          if (($li->flavor == PROD_TO_PROD) || ($li->flavor == PROD_TO_CAT)
          ) {
-            if ($li->ident1 != $discount_item['id']) {
+            if ($li->ident1 != (int)$discount_item['id']) {
                continue;
             }
          }
@@ -337,7 +337,7 @@ class ot_better_together {
             $match = 0;
             if (($li->flavor == PROD_TO_PROD) || ($li->flavor == CAT_TO_PROD)
             ) {
-               if ($all_items[$i]['id'] == $li->ident2) {
+               if ((int)$all_items[$i]['id'] == $li->ident2) {
                   $match = 1;
                }
             }
@@ -382,11 +382,11 @@ class ot_better_together {
          $li = $this->twoferlist[$dis];
 
          // Based on type, check ident1
-         if (($li->flavor == TWOFER_PROD) && ($li->ident1 == $discount_item['id'])
+         if (($li->flavor == TWOFER_PROD) && ($li->ident1 == (int)$discount_item['id'])
          ) {
             return true;
          }
-         else if (($li->flavor == TWOFER_CAT) && ($li->ident1 == $discount_item['category'])
+         else if (($li->flavor == TWOFER_CAT) && ($li->ident1 == (int)$discount_item['category'])
          ) {
             return true;
          }
@@ -664,14 +664,14 @@ class ot_better_together {
          $second_image = '';
          $disc_href = '';
          $name = '';
-         if (($li->flavor == PROD_TO_PROD) && ($li->ident1 == $id)
+         if (($li->flavor == PROD_TO_PROD) && ($li->ident1 == (int)$id)
          ) {
             $match = 1;
             $disc_href = '<a href="' . zen_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $li->ident2) . '">';
             $second_image = zen_get_products_image($li->ident2);
             $name = zen_get_products_name($li->ident2, $_SESSION['languages_id']);
          }
-         else if (($li->flavor == PROD_TO_CAT) && ($li->ident1 == $id)
+         else if (($li->flavor == PROD_TO_CAT) && ($li->ident1 == (int)$id)
          ) {
             $match = 1;
             $disc_href = '<a href="' . zen_href_link(FILENAME_DEFAULT, 'cPath=' . $li->ident2) . '">';
@@ -732,7 +732,7 @@ class ot_better_together {
          $bbn = false;
          $bbn_string = '';
          $disc_string = $first_image = $second_image = $first_href = $disc_href = '';
-         if (($li->flavor == TWOFER_PROD) && ($li->ident1 == $id)
+         if (($li->flavor == TWOFER_PROD) && ($li->ident1 == (int)$id)
          ) {
             $match = 1;
             if ($this->nocontext == 0) {
@@ -813,7 +813,7 @@ class ot_better_together {
          $disc_href = '';
          $second_image = '';
          $bbn_string = '';
-         if (($li->flavor == PROD_TO_PROD) && ($li->ident1 == $id)
+         if (($li->flavor == PROD_TO_PROD) && ($li->ident1 == (int)$id)
          ) {
             $match = 1;
             // Can we buy both now?
@@ -829,7 +829,7 @@ class ot_better_together {
             $second_image = zen_get_products_image($li->ident2);
 
          }
-         else if (($li->flavor == PROD_TO_CAT) && ($li->ident1 == $id)
+         else if (($li->flavor == PROD_TO_CAT) && ($li->ident1 == (int)$id)
          ) {
             $match = 1;
             $disc_link = '<a href="' . zen_href_link(FILENAME_DEFAULT, 'cPath=' . $li->ident2) . '">' . zen_get_category_name($li->ident2, $_SESSION['languages_id']) . '</a>';
@@ -947,7 +947,7 @@ class ot_better_together {
             continue;
          }
          $this_string = REV_GET_DISC;
-         if (($li->flavor == PROD_TO_PROD) && ($li->ident2 == $id)
+         if (($li->flavor == PROD_TO_PROD) && ($li->ident2 == (int)$id)
          ) {
             $match = 1;
             $disc_link = '<a href="' . zen_href_link(FILENAME_PRODUCT_INFO, 'products_id=' . $li->ident1) . '">' . zen_get_products_name($li->ident1, $_SESSION['languages_id']) . '</a>';
@@ -993,7 +993,7 @@ class ot_better_together {
                $this_string = GET_YOUR_CAT . zen_get_category_name($li->ident2, $_SESSION['languages_id']);
             }
          }
-         else if (($li->flavor == CAT_TO_PROD) && ($li->ident2 == $id)
+         else if (($li->flavor == CAT_TO_PROD) && ($li->ident2 == (int)$id)
          ) {
             $match = 1;
             $disc_link = '<a href="' . zen_href_link(FILENAME_DEFAULT, 'cPath=' . $li->ident1) . '">' . zen_get_category_name($li->ident1, $_SESSION['languages_id']) . '</a>';
@@ -1068,10 +1068,10 @@ class ot_better_together {
 
       // Add all linkages here
       // Some examples are provided:
-      $this->add_cat_to_prod(4, 3, "%", 100);
+      // $this->add_cat_to_prod(4, 3, "%", 100);
       // $this->add_cat_to_cat(21, 14, "%", 100);
       // $this->add_prod_to_prod(3, 180, "%", 100);
-      // $this->add_prod_to_prod(3, 27, "%", 100);
+      // $this->add_prod_to_prod(26, 26, "%", 100);
 
    }
 
